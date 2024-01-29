@@ -21,20 +21,20 @@ int main(){
     */
     
     int num, maxChars;
-    cout << "Enter N: ";
+    cout << "Enter N: "; // 5
     cin >> num;
 
-    maxChars = num*num;
+    maxChars = num*num; //25 
 
-    for (int i = 0; i < maxChars; ++i){
-        int row = i/num;
-        int column = i % num;
+    for (int i = 0; i < maxChars; i++){
+        int row = i/num; // 0/5 = 0, 1/5 = 0, 6/5 = 1, 7/5 = 1 
+        int column = i % num; // 0%5 = 0, 1%5 = 1, 6 % 5 = 1, 7 % 5 = 2;
 
         // cout << row;
         // cout << column;
 
         /*
-        if the row value is less than or equal to the column value, 
+        if the row value is less than or equal to the column value, which will never exceed 4,
         we input 1, otherwise 0
         */ 
         if (row <= column){
