@@ -22,6 +22,7 @@ Sample output:
 */
 
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <array>
 using namespace std;
@@ -29,10 +30,10 @@ using namespace std;
 int main(){
     string item;
     array<string,20> items;
-    float total;
+    float total = 0;
     int idx = 0; 
 
-    while (idx !=  19){
+    while (idx < items.size()){
         int quantity; 
         float cost;
 
@@ -58,12 +59,12 @@ int main(){
     for (size_t i = 0; i < idx; ++i){
         cout << "'" << items[i] << "'";
         if (i != idx - 1){
-            cout << ", ";
+            cout << ",";
         }
     }
     cout << "]" << endl;
 
-    cout << "Total cost:$" << total;
+    cout << "Total cost:$" << fixed << setprecision(2) << total << endl;
 
     return 0;
 }
