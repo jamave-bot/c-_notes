@@ -1,11 +1,18 @@
 // Account.h
 
+#ifndef ACCOUNT_H //if this is not defined, we define it here, this prevents error of multiple includes of this file in other files
+#define ACCOUNT_H 
+
 #include <string>
 #include <iostream>
 
 class Account{
 public:
-    Account(std::string accountName, int initialBalance)
+    Account(){}
+
+    explicit Account(std::string accountName):name(accountName){} //if only 1 argument we can put the word 'explicit' before the function name
+
+    Account(std::string accountName, int initialBalance) 
         :name(accountName){
 
         if (initialBalance > 0){
@@ -19,7 +26,7 @@ public:
         }
     }
 
-    int getBalance(){
+    int getBalance() const{
         return balance;
     }
 
@@ -27,7 +34,7 @@ public:
         name = accountName;
     }
 
-    std::string getName(){
+    std::string getName() const{ // const keyword after to ensure no data is being changed
         return name;
     }
 
@@ -40,6 +47,8 @@ public:
     }
 
 private:
-    std::string name;
+    std::string name; // default constructor called here 
     int balance{0};
 };
+
+#endif //ends the define
