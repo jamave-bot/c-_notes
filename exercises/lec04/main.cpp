@@ -1,32 +1,85 @@
-#include "Time.h"
+#include "Company.h"
+#include "Employee.h"
+#include "Date.h"
+#include <string>
 #include <iostream>
-#include <stdexcept>
+#include <array>
+
 using namespace std;
 
-int main()
-{
+int main(){
+    // string companyName;
+    // int employeeNum;
 
-   Time time1{23,45,12};
-   Time time2{2, 10};
-   Time time3{4};
-   Time time4;
+    Employee *empList = new Employee[2];
 
-   Time & timeRef = time2;
-   Time * timePtr = &time1;
-/*
-   try{
-         time1.setTime(23, 45, 12);
-         time2.setTime(2, 10, 8);
-         time3.setTime(45, 45, 45);
 
-   }catch(invalid_argument & expObject)
-   {
-        cout << expObject.what() << endl;
-   }
-*/
-   cout << "Time1: " << timePtr->toUniversalString() << "   " << timePtr->toStandardString() << endl;
-   cout << "Time2: " <<timeRef.toUniversalString() << "   " << timeRef.toStandardString() << endl;
-   cout << "Time3: " <<time3.toUniversalString() << "   " << time3.toStandardString() << endl;
-   cout << "Time4: " <<time4.toUniversalString() << "   " << time4.toStandardString() << endl;
+    empList[0] =  Employee("Jim", "bo", Date(2,12,2000), Date(3,4,1998));
+    empList[1] =  Employee("Jill", "boo",Date(3,6, 2000), Date(7,1, 2020));
 
+    Company aperture("aperture");
+    aperture.setEmployeeList(empList, 2);
+    cout << aperture.toString() << endl; 
+    
+    // *datePtr is created in the stack, the object itself is created inside the heap
+    // The pointer is the only way we can access the newly created object
+    // Date *datePtr = new Date{5 13, 1990};
+
+    // Since this is in the heap, it does not delete automatically, we have to do it ourself
+    // good practice to check if it's not nullPtr then delete
+    // if (datePtr != nullptr){
+    //     delete datePtr;
+    //     datePtr = nullptr;
+    // }
+    // delete datePtr;
+
+    //creating a list of Date objects using the heap
+    // This creates an array of pointers in the heap
+    // in order to make this call, there has to be no parameters
+    // Date *dateArrayPtr = new Date[3];
+
+    // to delete an array of object pointers, we have to use [] to indicate it's an array
+    // good practice to check if it's not nullPtr then delete
+    // if (dateArrayPtr != nullptr){
+    //     delete [] dateArrayPtr;
+    //     dateArrayPtr = nullptr;
+    // }
+
+    // cout << "Enter company name: ";
+    // cin >> companyName;
+    // Company company{companyName};
+
+    // cout << "Enter number of employees: ";
+    // cin >> employeeNum;
+
+    // Employee *employeesArrPtr = new Employee[employeeNum]; // must have default values
+    
+    // for (int i = 0; i < employeeNum; i++){
+    //     string firstname, lastname;
+    //     unsigned int birthMonth, birthDay, birthYear, hiredMonth, hiredDay, hiredYear;
+    //     cout << "Employee " << i + 1 << ":" << endl;
+    //     cout << "Enter firstname and lastname: ";
+    //     cin >> firstname >> lastname;
+
+    //     cout << "Enter birthDate: ";
+    //     cin >> birthMonth >> birthDay >> birthYear; 
+    //     cout << "enter hireDate: ";
+    //     cin >> hiredMonth >> hiredDay >> hiredYear; 
+
+    //     Date birthDate{birthMonth, birthDay, birthYear};
+    //     Date hiredDate{hiredMonth, hiredDay, hiredYear};
+
+
+    //     employeesArrPtr[i] = Employee{firstname, lastname, birthDate, hiredDate};;
+
+    //     if (employeePtr != nullptr){
+    //         delete employeePtr;
+    //         employeePtr = nullptr;
+    //     }
+    // }
+
+    // company.setEmployeeList(employeesArrPtr,employeeNum);
+    // company.toString();
+
+    return 0;
 }
