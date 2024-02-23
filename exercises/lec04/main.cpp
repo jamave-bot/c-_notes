@@ -8,18 +8,16 @@
 using namespace std;
 
 int main(){
-    // string companyName;
-    // int employeeNum;
 
-    Employee *empList = new Employee[2];
+    // Employee *empList = new Employee[2];
 
 
-    empList[0] =  Employee("Jim", "bo", Date(2,12,2000), Date(3,4,1998));
-    empList[1] =  Employee("Jill", "boo",Date(3,6, 2000), Date(7,1, 2020));
+    // empList[0] =  Employee("Jim", "bo", Date(2,12,2000), Date(3,4,1998));
+    // empList[1] =  Employee("Jill", "boo",Date(3,6, 2000), Date(7,1, 2020));
 
-    Company aperture("aperture");
-    aperture.setEmployeeList(empList, 2);
-    cout << aperture.toString() << endl; 
+    // Company aperture("aperture");
+    // aperture.setEmployeeList(empList, 2);
+    // cout << aperture.toString() << endl; 
     
     // *datePtr is created in the stack, the object itself is created inside the heap
     // The pointer is the only way we can access the newly created object
@@ -45,41 +43,44 @@ int main(){
     //     dateArrayPtr = nullptr;
     // }
 
-    // cout << "Enter company name: ";
-    // cin >> companyName;
-    // Company company{companyName};
+    string companyName;
+    int employeeNum;
 
-    // cout << "Enter number of employees: ";
-    // cin >> employeeNum;
+    cout << "Enter company name: ";
+    cin >> companyName;
+    Company company{companyName};
 
-    // Employee *employeesArrPtr = new Employee[employeeNum]; // must have default values
+    cout << "Enter number of employees: ";
+    cin >> employeeNum;
+
+    Employee *employeesArrPtr = new Employee[employeeNum]; // must have default values
     
-    // for (int i = 0; i < employeeNum; i++){
-    //     string firstname, lastname;
-    //     unsigned int birthMonth, birthDay, birthYear, hiredMonth, hiredDay, hiredYear;
-    //     cout << "Employee " << i + 1 << ":" << endl;
-    //     cout << "Enter firstname and lastname: ";
-    //     cin >> firstname >> lastname;
+    for (int i = 0; i < employeeNum; i++){
+        string firstname, lastname;
+        unsigned int birthMonth, birthDay, birthYear, hiredMonth, hiredDay, hiredYear;
+        cout << "Employee " << i + 1 << ":" << endl;
+        cout << "Enter firstname and lastname: ";
+        cin >> firstname >> lastname;
 
-    //     cout << "Enter birthDate: ";
-    //     cin >> birthMonth >> birthDay >> birthYear; 
-    //     cout << "enter hireDate: ";
-    //     cin >> hiredMonth >> hiredDay >> hiredYear; 
+        cout << "Enter birthDate: ";
+        cin >> birthMonth >> birthDay >> birthYear; 
+        cout << "enter hireDate: ";
+        cin >> hiredMonth >> hiredDay >> hiredYear; 
 
-    //     Date birthDate{birthMonth, birthDay, birthYear};
-    //     Date hiredDate{hiredMonth, hiredDay, hiredYear};
+        Date birthDate{birthMonth, birthDay, birthYear};
+        Date hiredDate{hiredMonth, hiredDay, hiredYear};
 
 
-    //     employeesArrPtr[i] = Employee{firstname, lastname, birthDate, hiredDate};;
+        employeesArrPtr[i] = Employee{firstname, lastname, birthDate, hiredDate};;
 
-    //     if (employeePtr != nullptr){
-    //         delete employeePtr;
-    //         employeePtr = nullptr;
-    //     }
-    // }
+        if (employeePtr != nullptr){
+            delete employeePtr;
+            employeePtr = nullptr;
+        }
+    }
 
-    // company.setEmployeeList(employeesArrPtr,employeeNum);
-    // company.toString();
+    company.setEmployeeList(employeesArrPtr,employeeNum);
+    company.toString();
 
     return 0;
 }
