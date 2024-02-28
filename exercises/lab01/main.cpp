@@ -54,16 +54,20 @@ void test1()
 }
 
 int main(int argc, const char * argv[]) {
-    test1();
+    // test1();
     
-    // DriverLicense license1;
+    array<DriverLicense, 2> licenses;
 
-    // license1.setID("1111regfd");
-    // license1.setHeightFeet(-1);
-    // license1.setHeightInches(-4);
-    // license1.setLicenseType("zzzzz");
-    // license1.setGender("G");
+    // license[0] = DriverLicense(...)
+    // license[1] = DriverLicense(...)
 
+    cout << "Licenses: \n";
+    // for loop to go through each license, displaying each info with toString
+
+    // while loop to check if 'quit' has been entered
+
+        //inner while loop to check if -1 has been inputted for an option (could be switch statement)
+        // have try catch blocks when user inputs invalid option (date)
      
     return 0;
 }
