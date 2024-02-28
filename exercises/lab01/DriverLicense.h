@@ -19,9 +19,7 @@ The rest of the data members are all strings.
 class DriverLicense{
 public:
     DriverLicense();
-    DriverLicense(std::string iid, std::string fName, std::string
-lName, std::string addr, Date iDate, Date eDate, Date dob, int feet, int
-inches, std::string lType, std::string eColor, std::string gen);
+    DriverLicense(std::string iid, std::string fName, std::string lName, std::string addr, Date iDate, Date eDate, Date dob, int feet, int inches, std::string lType, std::string eColor, std::string gen);
 
     void setID(std::string);
     void setHeightFeet(int);
