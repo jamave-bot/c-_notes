@@ -71,7 +71,8 @@ istream& operator>>(istream& input, Complex& obj){
     input.ignore(); // skips the ()
     input >> obj.real; // input day
     input.ignore(2); //skips the ", "
-    input >> obj.imaginary ; // inputs line
+    input >> obj.imaginary; // inputs line
+    input.ignore();
     return input; // enables cin >> a >> b >> c;
 };
 

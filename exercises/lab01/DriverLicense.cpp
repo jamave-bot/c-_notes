@@ -124,6 +124,6 @@ std::string DriverLicense::toString() const {
     output <<"Issue date: " << getIssueDate().toString() << " Expiration date: " << getExpDate().toString() << "\n";
     output << "DOB: "<< getDateOfBirth().toString() << "\n";
     output << "Height: " << getHeightFeet() <<"\'"<< getHeightInches()<< "\"" << "\n"; 
-    output << "Gender: " << getGender() << " License type: " << getLicenseType();
+    output << "Gender: " << getGender() << " License type: " << getLicenseType() << "\n";
     return output.str();
 }
