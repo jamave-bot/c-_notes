@@ -25,34 +25,9 @@ bool CheckingAccount::credit(double amount)
     return false;
 }
 
-/*
-bool Account::credit(double amount)
-{
-    if(amount >= 0)
-    {
-        balance += amount;
-        return true;
-    }else
-    {
-        cout << "Credit amount is invalid. Balance is unchanged." << endl;
-        return false;
-    }
-}
-
-*/
 
 bool CheckingAccount::debit(double amount)
 {
-    // if(amount > 0 and amount <= (balance - fee))
-    // {
-    //     balance -= (amount + fee);
-    //     return true;
-    // }else
-    // {
-    //     cout << "Debit amount is invalid. Balance is unchanged." << endl;
-    //     return false; 
-    // }
-
     if (Account::debit(amount + getFee())){
         return true;
     }
