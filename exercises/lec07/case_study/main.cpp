@@ -8,18 +8,18 @@
 #include <iostream>
 #include "BasePlusCommissionEmployee.h"
 #include <string>
+#include "SalariedEmployee.h"
 using namespace std;
 
 int main(int argc, const char * argv[]) {
     
-    string fname = "Jimmy";
-    string lname = "Slippin";
+    string fname = "Slippin";
+    string lname = "Jimmy";
     string ssn = "1111";
     
+    SalariedEmployee salariedEmp{fname, lname, ssn, 1000};
 
-    BasePlusCommissionEmployee bplusemp{fname, lname, ssn, 100, 0.50, 1000};
-
-    cout << bplusemp.toString();
+    cout << salariedEmp.toString();
 
     return 0;
 }

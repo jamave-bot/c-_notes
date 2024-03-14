@@ -42,8 +42,7 @@ string Employee::getSocialSecurityNumber() const {
 string Employee::toString() const {
    ostringstream output;
    output << fixed << setprecision(2); // two digits of precision   
-   output << "commission employee: "
-      << getFirstName() << ' ' << getLastName()
+   output << getFirstName() << ' ' << getLastName()
       << "\nsocial security number: " << getSocialSecurityNumber();
    return output.str();
 }
