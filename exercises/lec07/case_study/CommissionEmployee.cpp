@@ -50,7 +50,8 @@ double CommissionEmployee::earnings() const {
 string CommissionEmployee::toString() const {
    ostringstream output;
    output << fixed << setprecision(2); // two digits of precision   
-   output << Employee::toString()
+   output << "Commission Employee: " 
+      << Employee::toString()
       << "\ngross sales: " << getGrossSales()
       << "\ncommission rate: " << getCommissionRate();
    return output.str();
