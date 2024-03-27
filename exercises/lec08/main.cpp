@@ -3,6 +3,7 @@
 #include <vector>
 #include <cstdlib> // needed for random fn
 #include <algorithm> // needed for copy fn
+#include <list>
 
 using namespace std;
 
@@ -35,8 +36,8 @@ int main (){
     */
 
 
-   // VECTOR MEMORY ALLOCATION TESTS
-   /*
+    // VECTOR MEMORY ALLOCATION TESTS
+    /*
     vector<int> v; // initialize a vector v of ints
 
     cout << "Size: " << v.size() << " Capacity: " << v.capacity() << endl; // 0,0
@@ -88,6 +89,7 @@ int main (){
     } 
     */
 
+    /*
     vector<int> myvector; // empty vector
     for(int i = 0; i < 10; i++){
         myvector.push_back(rand()%100);
@@ -132,36 +134,36 @@ int main (){
     cout << "number of same elements: " << counterVector.size() << endl;
 
 
-    // vector<int> myvector2{23,54, 12, 87, 11}; //initializes the vector
-    // vector<int> myvector3{myvector2.cbegin(), myvector2.cend()}; // another way to initialize the vector, copies vector2 using its iterator addresses (begin, end) 
-    // vector<int> myvector4{90, 91, 92, 93};
+    vector<int> myvector2{23,54, 12, 87, 11}; //initializes the vector
+    vector<int> myvector3{myvector2.cbegin(), myvector2.cend()}; // another way to initialize the vector, copies vector2 using its iterator addresses (begin, end) 
+    vector<int> myvector4{90, 91, 92, 93};
 
-    // inserting myvector4's values into myvector3
+    inserting myvector4's values into myvector3
 
-    // myvector3.insert(myvector3.cbegin(), myvector4.cbegin(), myvector4.cend());
-
-
-
-    // myvector3.insert(myvector3.cbegin()+3, 11); //inserts at a given iterator address, then the value
-
-    // erasing the first 3 elements
-    // myvector3.erase(myvector3.cbegin(), myvector3.cbegin+3); // either erases the element at the address, or goes to the 2nd parameter's address
-
-    // print(myvector2);
-    // print(myvector3);
+    myvector3.insert(myvector3.cbegin(), myvector4.cbegin(), myvector4.cend());
 
 
-    // ostream_iterator<int> output{cout, " "}; // output is an ostream iterator that goes to cout and adds a " "
-    // copy(myvector3.cbegin(), myvector3.cend(), output);
 
-    // try{
-    //     cout << myvector3.at(6) << endl; // using at(6) instead of [6] will throw an exception message
-    // }
-    // catch(out_of_range &exp) {
-    //     cout << exp.what() << endl
-    // }
+    myvector3.insert(myvector3.cbegin()+3, 11); //inserts at a given iterator address, then the value
+
+    erasing the first 3 elements
+    myvector3.erase(myvector3.cbegin(), myvector3.cbegin+3); // either erases the element at the address, or goes to the 2nd parameter's address
+
+    print(myvector2);
+    print(myvector3);
 
 
+    ostream_iterator<int> output{cout, " "}; // output is an ostream iterator that goes to cout and adds a " "
+    copy(myvector3.cbegin(), myvector3.cend(), output);
+
+    try{
+        cout << myvector3.at(6) << endl; // using at(6) instead of [6] will throw an exception message
+    }
+    catch(out_of_range &exp) {
+        cout << exp.what() << endl
+    }
+   
+   */
 
     /* 
 
@@ -175,6 +177,81 @@ int main (){
 
     print(cvector);
     */
+
+    // 3/25/24 notes
+    list<int> list1;
+    list<int> list2;
+
+
+    //[1,2,3,4,5,6,7,8,9,10] -> list1
+    //[10,9,8,7,6,5,4,3,2,1] -> list2
+
+    for (int i = 1; i <= 10; i++){
+        list1.push_back(i);
+        list2.push_front(i);
+    }
+
+    // display both lists
+    ostream_iterator<int> it{cout, " "};
+
+    cout << "List1: ";
+    copy(list1.cbegin(), list1.cend(), it);
+    cout << endl;
+    cout << "List2: ";
+    copy(list2.cbegin(), list2.cend(), it);
+    cout << endl << endl;
+
+    //merge both lists
+    list1.sort();
+    list2.sort();
+    list1.merge(list2);
+
+    // display both lists
+    cout << "After merge:" << endl;
+    cout << "List1: ";
+    copy(list1.cbegin(), list1.cend(), it);
+    cout << endl;
+    cout << "List2: ";
+    copy(list2.cbegin(), list2.cend(), it);
+    cout << endl << endl;
+
+    //insert on list 2
+    list2.insert(list2.cbegin(), list1.cbegin(), list1.cend()); //insert to list2.cbegin elements from list1.cbeing to list1.cend
+
+    // removes duplicate elements from list1
+    list1.unique();
+
+    cout << "After unique/insert:" << endl;
+    cout << "List1: ";
+    copy(list1.cbegin(), list1.cend(), it);
+    cout << endl;
+    cout << "List2: ";
+    copy(list2.cbegin(), list2.cend(), it);
+    cout << endl << endl;
+
+
+
+    // splice list2 onto list1
+    list1.splice(list1.cend(), list2); // puts list2 elements into list1's cend address
+    
+    cout << "After splicing list1.splice(list1.cend(), list2):" << endl;
+    cout << "List1: ";
+    copy(list1.cbegin(), list1.cend(), it);
+    cout << endl;
+    cout << "List2: ";
+    copy(list2.cbegin(), list2.cend(), it);
+    cout << endl << endl;
+
+    // assign list1 to list2
+    list2.assign(list1.cbegin(), list1.cend());
+
+    cout << "After assign list2.assign(list1.cbegin(), list1.cend()): " << endl;
+    cout << "List1: ";
+    copy(list1.cbegin(), list1.cend(), it);
+    cout << endl;
+    cout << "List2: ";
+    copy(list2.cbegin(), list2.cend(), it);
+    cout << endl << endl;
 
     return 0;
 };
