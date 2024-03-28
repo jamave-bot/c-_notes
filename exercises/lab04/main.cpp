@@ -4,6 +4,7 @@
 #include <list>
 #include <deque>
 #include <chrono>
+#include <ctime>
 
 using namespace std;
 
@@ -84,7 +85,7 @@ int main(){
     sequentialWriteToEnd(myDeque);
     myVector.clear();
     myList.clear();
-    myList.clear();
+    myDeque.clear();
     //sequential write to the front
     cout << "Sequential write to the front "<< endl;
     sequentialWriteToFront(myVector);
@@ -249,11 +250,11 @@ template <typename T> void sequentialRead(deque<T> & d){
 
 template <typename T> void randomWrite(vector<T> & v){
     auto start = chrono::steady_clock::now();
-    
-    //insert 
+    srand(static_cast<unsigned int> (time(0)));
+
     for (int i= 0; i < 100000; i++){
-        long index = rand()%100000;
-        v.insert(v.begin() + index, 9);
+        long index = rand() % v.size();
+        v.insert(v.begin() + index, i);
     }
 
     auto end = chrono::steady_clock::now();
@@ -264,13 +265,14 @@ template <typename T> void randomWrite(vector<T> & v){
 
 template <typename T> void randomWrite(list<T> & l){
     auto start = chrono::steady_clock::now();
+    srand(static_cast<unsigned int> (time(0)));
     
     //insert 
     for (int i= 0; i < 100000; i++){
+        long index = rand() % l.size();
         auto it = l.begin();
-        long index = rand()%100000;
         advance(it, index);
-        l.insert(it, 9);
+        l.insert(it, i);
     }
 
     auto end = chrono::steady_clock::now();
@@ -281,11 +283,13 @@ template <typename T> void randomWrite(list<T> & l){
 
 template <typename T> void randomWrite(deque<T> & d){
     auto start = chrono::steady_clock::now();
+    srand(static_cast<unsigned int> (time(0)));
+
     
     //insert 
     for (int i= 0; i < 100000; i++){
-        long index = rand()%100000;
-        d.insert(d.begin() + index, 9);
+        long index = rand() % d.size();
+        d.insert(d.begin() + index, i);
     }
 
     auto end = chrono::steady_clock::now();
@@ -296,6 +300,8 @@ template <typename T> void randomWrite(deque<T> & d){
 
 template <typename T> void randomRead(vector<T> &v){
     auto start = chrono::steady_clock::now();
+    srand(static_cast<unsigned int> (time(0)));
+
     
     //insert 
     for (int i= 0; i < 100000; i++){
@@ -311,6 +317,7 @@ template <typename T> void randomRead(vector<T> &v){
 
 template <typename T> void randomRead(list<T> &l){
     auto start = chrono::steady_clock::now();
+    srand(static_cast<unsigned int> (time(0)));
     
     //insert 
     for (int i= 0; i < 100000; i++){
@@ -329,6 +336,7 @@ template <typename T> void randomRead(list<T> &l){
 
 template <typename T> void randomRead(deque<T> &d){
     auto start = chrono::steady_clock::now();
+    srand(static_cast<unsigned int> (time(0)));
     
     //insert 
     for (int i= 0; i < 100000; i++){
