@@ -1,39 +1,42 @@
-#include "Queue.h"
 #include <iostream>
+#include "vector"
+#include "Package.h"
+#include "TwoDayPackage.h"
+#include "OvernightPackage.h"
 #include <cstdlib>
-
-int main(){
-    Queue<int> q1;
-    Queue<double> q2;
-
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+using namespace std;
+int main(int argc, char** argv) {
+	
+	vector<Package *> packages;
+	
+	string sName, sAddr, sZip, rName, rAddr, rZip;
+	double weight, cost, fFee, aFee; 
+	
+	// get those values from the user
+	cout << "Enter name:";
+	getline(cin, sName); 
+	
+	
+	
+	
+	
+	TwoDayPackage * newpackage = new TwoDayPackage{sName, sAddr, sZip,
+	                                               rName, rAddr, rZip,
+												  weight, cost,fFee};
+  
+    OvernightPackage * newpackage2 = new OvernightPackage{"Sherlock Holmes", "221B baker st", "1123",
+	                                               "John Watson", "43 Times Square", "4545",
+												   2.5, 1.5, 2.0};
     
-    for (int i = 0; i < 20; i++){
-        int random = rand()%10;
-        q1.enqueue(random);
-        q1.print();
+    packages.push_back(newpackage);
+    packages.push_back(newpackage2);
+    
+    for(Package * p: packages)
+    {
+    	cout << p->toString() << endl; 
+    	cout << "Cost: " << p->calculateCost() << endl;
     }
-
-
-    for (int i = 0; i < 20; i++){
-        cout << "Removed " << q1.dequeue() << endl;
-        q1.print();
-    }
-
-
-    // double
-    for (int i = 0; i < 20; i++){
-        double random = rand()%10;
-        q2.enqueue(random);
-        q2.print();
-    }
-
-
-    for (int i = 0; i < 21; i++){
-        cout << "Removed " << q2.dequeue() << endl;
-        q2.print();
-    }
-
-
-
-    return 0;
+	
+	return 0;
 }

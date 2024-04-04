@@ -26,13 +26,14 @@ public:
         this->myQueue.push_back(q);
     }
 
-    QUEUETYPE& dequeue(){
+    QUEUETYPE dequeue(){
+        QUEUETYPE returnEle;
         if (this->empty()){
             throw out_of_range("Cannot remove element. The queue is empty");
         } else{
-            QUEUETYPE returnEle = this->front(); 
+            returnEle = this->front(); 
             this->myQueue.pop_front();
-            return &returnEle;
+            return returnEle;
         }
     }
 
