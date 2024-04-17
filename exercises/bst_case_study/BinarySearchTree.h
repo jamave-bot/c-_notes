@@ -108,13 +108,15 @@ private:
         // conditions for if the node only has 1 child
         if (nodePtr->rightChild == nullptr){
             TreeNode<NODETYPE> * newRootPtr = nodePtr->leftChild; // makes copy of the other child
-            delete nodePtrl
+            delete nodePtr;
             return newRootPtr;
         } else if (nodePtr->leftChild == nullptr){
             TreeNode<NODETYPE> * newRootPtr = nodePtr-> rightChild;
             delete nodePtr;
             return newRootPtr;
         }
+
+        // conditions for if it has 2 children
 
         TreeNode<NODETYPE> * succParent = nodePtr; // successor parent
         TreeNode<NODETYPE> * succ = nodePtr->rightChild; // successor
