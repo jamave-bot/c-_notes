@@ -25,6 +25,10 @@ public:
         return rSearchKey(root, key);
     }
 
+    void removeNode(NODETYPE key){
+        root = rRemoveNode(root, key);
+    }
+
 private:
     TreeNode<NODETYPE> * root{nullptr};
 
@@ -86,6 +90,49 @@ private:
         } else {                            // otherwise we chack the right side
             return rSearchKey(nodePtr->rightChild, key);
         }
+    }
+
+    TreeNode<NODETYPE>* rRemoveNode(TreeNode<NODETYPE>* nodePtr, NODETYPE key){
+        if (nodePtr == nullptr) return nodePtr;
+
+        if (key < nodePtr->data){
+            nodePtr->leftChild = rRemoveNode(nodePtr->leftChild, key);
+            return nodePtr;
+        }
+
+        if(key > nodePtr->data){
+            nodePtr->rightChild = rRemoveNode(nodePtr->rightChild, key); // sets the new right to what we return
+            return nodePtr;
+        }
+
+        // conditions for if the node only has 1 child
+        if (nodePtr->rightChild == nullptr){
+            TreeNode<NODETYPE> * newRootPtr = nodePtr->leftChild; // makes copy of the other child
+            delete nodePtrl
+            return newRootPtr;
+        } else if (nodePtr->leftChild == nullptr){
+            TreeNode<NODETYPE> * newRootPtr = nodePtr-> rightChild;
+            delete nodePtr;
+            return newRootPtr;
+        }
+
+        TreeNode<NODETYPE> * succParent = nodePtr; // successor parent
+        TreeNode<NODETYPE> * succ = nodePtr->rightChild; // successor
+
+        while (succ->leftChild != nullptr){
+            succParent = succ;
+            succ = succ->leftChild;
+        }
+
+        if (succParent != nodePtr){
+            succParent->leftChild = succ->rightChild;
+        } else{
+            succParent->rightChild = succ->rightChild;
+        }
+
+        nodePtr->data = succ->data; // we only replace the node's data
+        delete succ;
+        return nodePtr; // same ptr just with correct value
     }
 };
 
