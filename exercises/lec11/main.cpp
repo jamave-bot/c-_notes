@@ -1,12 +1,13 @@
 #include <iostream>
 #include <array>
 #include <algorithm>
+#include <chrono>
 
 using namespace std;
 
 // linear search for comparison
 template <typename T, size_t size>
-int recursiveLinearSearch(const array<T, size>, &items, T &searchKey, int pos){
+int recursiveLinearSearch(const array<T, size> &items, T &searchKey, int pos){
     if (pos >= items.size()){ // we've reached the end of the array
         return -1;
     }
@@ -47,7 +48,7 @@ int recursiveBinarySearch(const array<T, size> &items, T &searchKey, int low, in
 
 int main (){
 
-    array<int, 100000> myarray;
+    array<int, 1000000> myarray;
 
     for (int i = 0; i < myarray.size(); i++){
         myarray[i] = i + 1;
@@ -56,9 +57,9 @@ int main (){
     // sort is from the algorithm library, takes in 2 iterators, the beginning and ending 
     sort(myarray.begin(), myarray.end());
 
-    for (int item: myarray){
-        cout << item << " ";
-    }
+    // for (int item: myarray){
+    //     cout << item << " ";
+    // }
     cout << endl;
 
     int searchKey;
@@ -66,18 +67,24 @@ int main (){
     cin >> searchKey;
 
     // while (searchKey != -1){
-        int pos = recursiveBinarySearch(myarray, searchKey, 0, myarray.size() - 1);
-        pos = recursiveBinarySearch(myarray, searchKey, 0, myarray.size() - 1);
+    auto start = chrono::steady_clock::now();
+    
+    int pos = recursiveBinarySearch(myarray, searchKey, 0, myarray.size() - 1);
 
-        // if (pos != -1){
-        //     cout << "Found " << searchKey << " at position " << pos << "."<< endl;
-        // } else {
-        //     cout << "Could not find " << searchKey << "." << endl;
-        // }
+    auto end = chrono::steady_clock::now();
+    cout << "Binary Search: Elapsed time in milliseconds : "
+    << chrono::duration_cast<chrono::milliseconds>(end - start).count()
+    << " ms" << endl;
 
-        // cout << "Enter searchKey: ";
-        // cin >> searchKey;
-    // }
+    start = chrono::steady_clock::now();
+    
+    pos = recursiveLinearSearch(myarray, searchKey, 0);
+
+    end = chrono::steady_clock::now();
+    cout << "Linear Search: Elapsed time in milliseconds : "
+    << chrono::duration_cast<chrono::milliseconds>(end - start).count()
+    << " ms" << endl;
+
 
 
     return 0;
