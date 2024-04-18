@@ -1,7 +1,26 @@
 #include <iostream>
 #include <array>
+#include <algorithm>
+
+using namespace std;
+
+// linear search for comparison
+template <typename T, size_t size>
+int recursiveLinearSearch(const array<T, size>, &items, T &searchKey, int pos){
+    if (pos >= items.size()){ // we've reached the end of the array
+        return -1;
+    }
+
+    if (items[pos] == searchKey){
+        return pos;
+    } else {
+        return recursiveLinearSearch(items, searchKey, pos+1);
+    }
+}
+
 
 // array must be a reference because we don't want to copy a huge array
+// Time complexity: O(logn)
 template <typename T, size_t size>
 int recursiveBinarySearch(const array<T, size> &items, T &searchKey, int low, int high){
     // base cases: 
@@ -17,14 +36,49 @@ int recursiveBinarySearch(const array<T, size> &items, T &searchKey, int low, in
     if(items[mid] == searchKey){ // if the middle of the array is the element we're searching for, we return that index
         return mid;
     } else if (searchKey < items[mid]) {
-        recursiveBinarySearch(items, searchKey, low, mid-1); // call the function recursively, setting new points for the low and high
+        // time complexity: T(n/2)
+        return recursiveBinarySearch(items, searchKey, low, mid-1); // call the function recursively, setting new points for the low and high
     } else {
-        recursiveBinarySearch(items, searchKey, mid+1, high); // call the function recursively, setting new points for the low and high
+        // time complexity: T(n/2)
+        return recursiveBinarySearch(items, searchKey, mid+1, high); // call the function recursively, setting new points for the low and high
     }
 
-}; 
+}
 
 int main (){
 
+    array<int, 100000> myarray;
+
+    for (int i = 0; i < myarray.size(); i++){
+        myarray[i] = i + 1;
+    }
+
+    // sort is from the algorithm library, takes in 2 iterators, the beginning and ending 
+    sort(myarray.begin(), myarray.end());
+
+    for (int item: myarray){
+        cout << item << " ";
+    }
+    cout << endl;
+
+    int searchKey;
+    cout << "Enter searchKey: ";
+    cin >> searchKey;
+
+    // while (searchKey != -1){
+        int pos = recursiveBinarySearch(myarray, searchKey, 0, myarray.size() - 1);
+        pos = recursiveBinarySearch(myarray, searchKey, 0, myarray.size() - 1);
+
+        // if (pos != -1){
+        //     cout << "Found " << searchKey << " at position " << pos << "."<< endl;
+        // } else {
+        //     cout << "Could not find " << searchKey << "." << endl;
+        // }
+
+        // cout << "Enter searchKey: ";
+        // cin >> searchKey;
+    // }
+
+
     return 0;
-}
+};
