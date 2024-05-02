@@ -15,7 +15,7 @@ public:
     NODETYPE getMember() const {return famMember;}
 private:
     NODETYPE famMember;
-    std::vector<NODETYPE *> children;
+    std::vector<FamilyMember *> children;
 
 };
 

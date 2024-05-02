@@ -46,6 +46,23 @@ int recursiveBinarySearch(const array<T, size> &items, T &searchKey, int low, in
 
 }
 
+/* in the case where we have a doubly linked list
+template <typename T>
+void insertionSort(DoublylinkedList<T> list){
+    for (DoublyLinkedList<T> next = firstPtr->next; next != nullptr; next = next->nextPtr){
+        T insert = next->getData();
+        DoublyLinkedList<T> moveIndex = next;
+    }
+
+    while ((moveIndex != firstPtr) && (moveIndex->prevPtr->getData() > insert) ){
+        moveIndex->setData(moveIndex->prePtr->getData());
+        moveIndex = moveIndex->prevPtr;
+    }
+
+    moveIndex->setData(insert);
+}
+*/ 
+
 int main (){
 
     array<int, 1000000> myarray;

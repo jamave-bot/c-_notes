@@ -1,9 +1,12 @@
 #include <iostream>
 #include "BinarySearchTree.h"
+#include "FamilyTree.h"
+#include "Person.h"
 
 using namespace std;
 
 int main (){
+    /* BST notes
     BinarySearchTree<int> intBst;
 
     cout << "Insert Element: ";
@@ -33,6 +36,20 @@ int main (){
         cout << "Enter search key: ";
         cin >> value;
     }
+    */
+
+
+    Person unknownBlack{"unknown", "Black"};
+    cout << unknownBlack.toString();
+
+
+    FamilyMember<Person>* unknownRoot = new FamilyMember<Person>{unknownBlack};
+
+    Person SiriusI{"Sirius", "Black", "1845-1853"};
+    FamilyTree<Person> blackFamilyTree(unknownRoot);
+
+
+
 
     return 0;
 }
