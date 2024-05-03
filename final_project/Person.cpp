@@ -39,10 +39,14 @@ void Person::setSpouse(string sp){
     spouse = sp;
 }
 
-string Person::toString(){
+string Person::toString(int indents = 0){
     ostringstream output; 
-    output << this->getFirstName() << " " << this->getLastName() << endl
-        << this->getYearsAlive() << endl
-        << "Married to:\n" << this->getSpouse() << endl;
+    string ind = "";
+    for (int i = 0; i < indents; i++){
+        ind += "--";
+    }
+    output << ind << this->getFirstName() << " " << this->getLastName() << endl
+        << ind <<this->getYearsAlive() << endl
+        <<  ind << "Married to: " << this->getSpouse() << "\n\n";
     return output.str();
 }

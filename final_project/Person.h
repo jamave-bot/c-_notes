@@ -6,7 +6,7 @@
 
 class Person{
 public:
-    Person(std::string fName, std::string lName, std::string years="", std::string sp="");
+    Person(std::string fName, std::string lName, std::string years="", std::string sp="N/A");
 
     std::string getFirstName();
     std::string getLastName();
@@ -19,7 +19,7 @@ public:
     void setYearsAlive(std::string);
     void setSpouse(std::string);
 
-    std::string toString();
+    std::string toString(int);
 private:
     std::string firstName;
     std::string lastName;

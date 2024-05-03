@@ -49,9 +49,22 @@ private:
 
 
     // TODO: recursive search and traversal functions 
-    void rTraverse(FamilyMember<NODETYPE> * rootPtr){
-        std::cout <<  rootPtr->famMember.toString();
-        
+    void rTraverse(FamilyMember<NODETYPE> * rootPtr, int indents = 0){
+        std::cout <<  rootPtr->getMember().toString(indents);
+
+        if (!(rootPtr->getChildren().empty())){
+            std::string ind = "";
+            for (int i = 0; i < indents; i++){
+                ind += "--";
+            }
+            std::cout << ind + "Children of " + rootPtr->getMember().getFirstName() + " " +  rootPtr->getMember().getLastName() + ":\n"; 
+            indents++;
+            for (size_t i = 0; i < rootPtr->getChildren().size(); i++){
+                rTraverse(rootPtr->getChildren()[i], indents);
+                // std::cout << rootPtr->getChildren()[i]->getMember().toString();
+            }
+        }
+        // std::cout << rootPtr->getChildren()[0]->getMember().toString();
     }
 
     void rSearch(FamilyMember<NODETYPE> * rootPtr, std::string name){

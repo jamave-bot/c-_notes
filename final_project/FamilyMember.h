@@ -13,11 +13,14 @@ public:
     FamilyMember(NODETYPE person):famMember{person}{}
 
     NODETYPE getMember() const {return famMember;}
-    void addChild();
+    std::vector<FamilyMember *> getChildren() const {return children;}
+
+    void addChild(FamilyMember * newMember){
+        children.push_back(newMember);
+    }
 private:
     NODETYPE famMember;
     std::vector<FamilyMember *> children;
-
 };
 
 #endif
