@@ -46,8 +46,16 @@ int main (){
     FamilyMember<Person>* unknownRoot = new FamilyMember<Person>{unknownBlack};
 
     Person SiriusI{"Sirius", "Black", "1845-1853"};
-    FamilyTree<Person> blackFamilyTree(unknownRoot);
+    FamilyMember<Person> * siriusBlackI = new FamilyMember<Person>{SiriusI};
 
+    FamilyTree<Person> blackFamilyTree(unknownRoot);
+    
+
+
+
+    
+    blackFamilyTree.preOrderTraversal();
+    
 
 
 

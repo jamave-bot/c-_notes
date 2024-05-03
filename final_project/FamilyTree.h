@@ -50,10 +50,13 @@ private:
 
     // TODO: recursive search and traversal functions 
     void rTraverse(FamilyMember<NODETYPE> * rootPtr){
-
+        std::cout <<  rootPtr->famMember.toString();
+        
     }
 
+    void rSearch(FamilyMember<NODETYPE> * rootPtr, std::string name){
 
+    }
 
 };
 

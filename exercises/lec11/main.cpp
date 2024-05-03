@@ -61,7 +61,10 @@ void insertionSort(DoublylinkedList<T> list){
 
     moveIndex->setData(insert);
 }
-*/ 
+*/
+
+/* Merge Sort  
+*/
 
 int main (){
 

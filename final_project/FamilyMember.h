@@ -13,6 +13,7 @@ public:
     FamilyMember(NODETYPE person):famMember{person}{}
 
     NODETYPE getMember() const {return famMember;}
+    void addChild();
 private:
     NODETYPE famMember;
     std::vector<FamilyMember *> children;
