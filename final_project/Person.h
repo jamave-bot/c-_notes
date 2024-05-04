@@ -19,7 +19,7 @@ public:
     void setYearsAlive(std::string);
     void setSpouse(std::string);
 
-    std::string toString(int);
+    std::string toString(int indents = 0);
 private:
     std::string firstName;
     std::string lastName;

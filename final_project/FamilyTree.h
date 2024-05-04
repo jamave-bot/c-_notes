@@ -61,13 +61,29 @@ private:
             indents++;
             for (size_t i = 0; i < rootPtr->getChildren().size(); i++){
                 rTraverse(rootPtr->getChildren()[i], indents);
-                // std::cout << rootPtr->getChildren()[i]->getMember().toString();
             }
         }
-        // std::cout << rootPtr->getChildren()[0]->getMember().toString();
     }
 
-    void rSearch(FamilyMember<NODETYPE> * rootPtr, std::string name){
+    void rSearch(FamilyMember<NODETYPE> * rootPtr, std::string name, int indents = 0){
+        if (rootPtr->getMember().getFirstName() == name){
+            std::cout <<"Found: " <<  rootPtr->getMember().toString() << std::endl;
+            std::string ind = "";
+            for (int i = 0; i < indents; i++){
+                ind += "--";
+            }
+            std::cout << ind + "Children of " + rootPtr->getMember().getFirstName() + " " +  rootPtr->getMember().getLastName() + ":\n"; 
+            indents++;
+            for (size_t i = 0; i < rootPtr->getChildren().size(); i++){
+                rTraverse(rootPtr->getChildren()[i], indents);
+            }
+        }
+        if (!(rootPtr->getChildren().empty())){
+            for (size_t i = 0; i < rootPtr->getChildren().size(); i++){
+                rSearch(rootPtr->getChildren()[i], name, indents);
+            }
+        }
+
 
     }
 

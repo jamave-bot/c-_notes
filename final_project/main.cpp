@@ -2,6 +2,8 @@
 #include "BinarySearchTree.h"
 #include "FamilyTree.h"
 #include "Person.h"
+#include <string>
+
 
 using namespace std;
 
@@ -161,7 +163,21 @@ int main (){
     // ----------------------------------------------------------
     
     FamilyTree<Person> blackFamilyTree(PhineusBlack);
-    blackFamilyTree.preOrderTraversal();
 
+    
+    // blackFamilyTree.preOrderTraversal();
+
+
+    string input;
+    cout << "Enter a firstname in the Black family tree (-1 to exit): ";
+    cin >> input;
+    cout << endl;
+
+    while (input != "-1"){
+        blackFamilyTree.searchMember(input);
+        cout << "\nEnter a firstname in the Black family tree (-1 to exit): ";
+        cin >> input;
+        cout << endl;
+    }
     return 0;
 }
