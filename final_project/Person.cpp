@@ -39,7 +39,7 @@ void Person::setSpouse(string sp){
     spouse = sp;
 }
 
-string Person::toString(int indents = 0){
+string Person::toString(int indents){
     ostringstream output; 
     string ind = "";
     for (int i = 0; i < indents; i++){

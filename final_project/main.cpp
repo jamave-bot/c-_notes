@@ -8,41 +8,10 @@
 using namespace std;
 
 int main (){
-    /* BST notes
-    BinarySearchTree<int> intBst;
-
-    cout << "Insert Element: ";
-    int value;
-    cin >> value;
-
-    while(value != -1){
-        intBst.insertNode(value);
-        cout << "Insert element: ";
-        cin >> value;
-    }
-
-    intBst.inOrderTraversal();
-
-    cout << "Enter search key: ";
-    cin >> value;
-
-    while (value != -1){
-        TreeNode<int> * resultPtr = intBst.searchKey(value);
-
-        if (resultPtr == nullptr){
-            cout << "Not found." << endl;
-        } else {
-            cout << "Found " << resultPtr->getData() << endl;
-        }
-
-        cout << "Enter search key: ";
-        cin >> value;
-    }
-    */
 
     // Head of Family starting from 1847, Phineus Nigellus Black
     // ----------------------------------------------------------
-    Person Phineus{"Phineus Nigellus", "Black", "1847-1925"};
+    Person Phineus{"Phineus", "Nigellus Black", "1847-1925"};
     FamilyMember<Person>* PhineusBlack = new FamilyMember<Person>{Phineus};
 
     // Children of Phineus Nigellus Black
@@ -164,10 +133,10 @@ int main (){
     
     FamilyTree<Person> blackFamilyTree(PhineusBlack);
 
-    
-    // blackFamilyTree.preOrderTraversal();
+    // preOrderTraversal call
+    blackFamilyTree.preOrderTraversal();
 
-
+    // search call
     string input;
     cout << "Enter a firstname in the Black family tree (-1 to exit): ";
     cin >> input;
@@ -179,5 +148,6 @@ int main (){
         cin >> input;
         cout << endl;
     }
+
     return 0;
 }
