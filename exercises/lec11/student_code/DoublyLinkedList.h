@@ -208,18 +208,89 @@ public:
 
    void insertionSort()
    {
+      ListNode<NODETYPE> * next = firstPtr->nextPtr;
+      while (next != nullptr){ // while we're not at the end of the doubly linked list
+         NODETYPE insert = next->getData(); // save the element pointed by next
+         ListNode<NODETYPE> *moveIndex = next; // save the next pointer value into another pointer, moveIndex
+
+         while (moveIndex != firstPtr && moveIndex->prevPtr->getData() > insert){
+            moveIndex->data = moveIndex->prevPtr->data;
+            moveIndex = moveIndex->prevPtr;
+         }
+
+         moveIndex->data = insert;
+         next = next->nextPtr; // Set next to the next pointer in the array
+      }
+      
       
    }
 
    void insertAtSorted(NODETYPE & value)
    {
-      
+      if (isEmpty()) insertAtBack(value) // 1 
+      else{
+         ListNode<NODETYPE> * newPtr = new ListNode<NODETYPE>{value}; // 1
+         ListNode<NODETYPE> * currentPtr = firstPtr; //1
+         while (currentPtr != nullptr && currentPtr->getData() < newPtr->getData()){ // worst case: n times
+            currentPtr = currentPtr->nextPtr; // 
+         }
+         if (currentPtr == nullptr) insertAtBack(value); // 1
+         else if (currentPtr == firstPtr) insertAtFront(value); // 1
+         else{
+            currentPtr->prevPtr->nextPtr = newPtr; // 1
+            newPtr->prevPtr = currentPtr->prevPtr; // 1
+            newPtr->nextPtr = currentPtr;          // 1
+            currentPtr->prevPtr = newPtr;          // 1
+            size++;
+         }
+      }
    }
+
+   // T(n) = O(n) 
 
    NODETYPE binarySearch(NODETYPE & keyValue)
    {
-      
+      int low = 0;
+      int high = size - 1; 
+
+      ListNode<NODETYPE> * lowPtr = firstPtr;
+      ListNode<NODETYPE> * highPtr = lastPtr;
+      ListNode<NODETYPE> * midPtr = lowPtr;
+
+      int middle = (low + high + 1)/2; 
+   
+      for(int i = 0; i < middle-low; i++){
+         midPtr = midPtr->nextPtr;
+      }
+
+      ListNode<NODETYPE> * foundPtr = nullptr;
+
+      do{
+         midPtr = lowPtr;
+         if (keyValue == midPtr->getData()){
+            foundPtr = midPtr;
+         } else if (keyValue < midPtr->getData()){
+            high = middle - 1; 
+            highPtr = midPtr->prevPtr;
+         } else {
+            low = middle + 1;
+            lowPtr = midPtr->nextPtr;
+         }
+
+         middle = (low + high + 1)/2; 
+   
+      } while(low <= high && foundPtr == nullptr);
+
+      if (foundPtr != nullptr){
+         return foundPtr->getData();
+      } else {
+         return -1;
+      }
    }
+
+   // n -> n/2 -> n/4  -> ... until -> 1
+
+   // T(n) = O(log2(n))
 
 
    bool isEmpty() const {
