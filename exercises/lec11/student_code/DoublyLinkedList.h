@@ -117,180 +117,165 @@ public:
    // inserting at a specific position
   void insertAtPosition(int index, NODETYPE &value)
    {
-      /*
-         if index < size/2 we start from the front
-         if index > size/2 we start from the back
-         if i < 0, throw exception ✅
-         if i>= size, insertatback
-         if size = 0, insertatback/front doesn't matter
-         if i = 0, insertAtFront
-      */  
-
-     // if i < 0, throw exception ✅
-     if (index < 0){
-      throw std::out_of_range("index position does not exist");
-     } 
-      // if size = 0, insertatback/front doesn't matter
-     if (isEmpty()){
-      insertAtBack(value);
-     } else {
-      if (index == 0) insertAtFront(value);
-      else{
-            DoublyLinkedList<NODETYPE> * currentPtr = nullptr;
-            if (index < size/2){
-               currentPtr = firstPtr;
-               for (int i = 0; i < index; i++){
-                  currentPtr = currentPtr->nextPtr;
-               } else {
-                  currentPtr = lastPtr;
-                  for (int i = 0; i < index; i++){
-                     currentPtr = currentPtr->prevPtr;
-                  }
+   	if(index < 0) throw std::out_of_range("index position does not exist");
+		if(index >= size) insertAtBack(value);
+   	else{
+   	   if(index == 0) insertAtFront(value);
+   	   else{
+   	      ListNode<NODETYPE> *currentPtr = nullptr; // set a current pointer 
+		 	
+            if(index < size/2) // if we want to insert before the midpoint
+               {
+                  currentPtr = firstPtr;   // we make the current pointer  go to the index from the front
+                  for(int i = 0; i < index; i++)
+                     currentPtr = currentPtr->nextPtr;
                }
-            }
+            else{ // otherwise we go from the back 
+               currentPtr = lastPtr;
+               for(int i = 0; i < size-index-1; i++)
+                     currentPtr = currentPtr->prevPtr; 
+		 	   }
+		 	   
+		 	   ListNode<NODETYPE>* newPtr = new ListNode<NODETYPE>{value}; // new node
+		 	   
+            // now our current pointer is in the position where we want to insert our new value
 
-         ListNode<NODETYPE> * newPtr = new ListNode<NODETYPE>{value}; // new node
-         newPtr->nextPtr = currentPtr;
-         newPtr->prevPtr = currentPtr->prevPtr;
-         currentPtr->prevPtr->nextPtr = newPtr;
-         currentPtr->prevPtr = newPtr;
-
-         size++;
-
-
-      }
-
-      }
+            newPtr->nextPtr = currentPtr; // our new pointer's next point to the pointer we got from looping
+		 	   newPtr->prevPtr = currentPtr->prevPtr;
+		 	   currentPtr->prevPtr->nextPtr = newPtr;
+		 	   currentPtr->prevPtr = newPtr; 
+		 	   size++;
+		    }
+		 } 
+   	    
+      
    }
 
    void removeAtPosition(int index, NODETYPE &value)
    {
-      /*
-         if is empty, index < 0, index >= size , then we throw exception
-         if index < size/2, travers from the the front
-         otherwise, we traverse from the back
-
-      */
-
-     if (isEmpty() || index < 0 || index >= size) throw std::out_of_range("Index position does not exist");
-     
-     if (index == 0) removeFromFront(value);
-     else if (index == size - 1) removeFromBack(value);
-     else{
-         ListNode<NODETYPE> *currentPtr = nullptr;
+   	 
+      if(isEmpty() || index < 0 || index >=size) {
+	      throw std::out_of_range("index position does not exist");
+      }
+	  
+      if(index == 0) removeFromFront(value);
+      else if (index == size - 1) removeFromBack(value);
+      else{
+         ListNode<NODETYPE> *currentPtr = nullptr; 
          ListNode<NODETYPE> *tempPtr = nullptr;
-
-         // All this just to get into the correct position
-         if (index < size/2){
-               currentPtr = firstPtr;
-               for (int i = 0; i < index; i++){
+         if(index < size/2) {
+            currentPtr = firstPtr; 
+            for(int i = 0; i < index; i++)
                   currentPtr = currentPtr->nextPtr;
-               } 
-         else {
-               currentPtr = lastPtr;
-               for (int i = 0; i < index; i++){
-                  currentPtr = currentPtr->prevPtr;
-               }
-            }
-         }   
-
-      tempPtr = currentPtr;
-      value = tempPtr->getData();
-
-      currentPtr->prevPtr->nextPtr = currentPtr->nextPtr;
-      currentPtr->nextPtr->prevPtr = currentPtr->prevPtr;
-
-      size--;
-      delete tempPtr;
-
-     }
+         }
+         else{
+            currentPtr = lastPtr;
+            for(int i = 0; i < size-index-1; i++)
+                  currentPtr = currentPtr->prevPtr; 
+         }
+      
+         tempPtr = currentPtr; 
+         value = tempPtr->getData();
+         
+         currentPtr->prevPtr->nextPtr = currentPtr->nextPtr;
+         currentPtr->nextPtr->prevPtr = currentPtr->prevPtr;
+         size--;
+         delete tempPtr;
+      }
+     
    }
 
-   void insertionSort()
+   void insertionSort() // we don't mess with the pointers, only the values
    {
-      ListNode<NODETYPE> * next = firstPtr->nextPtr;
-      while (next != nullptr){ // while we're not at the end of the doubly linked list
-         NODETYPE insert = next->getData(); // save the element pointed by next
-         ListNode<NODETYPE> *moveIndex = next; // save the next pointer value into another pointer, moveIndex
-
-         while (moveIndex != firstPtr && moveIndex->prevPtr->getData() > insert){
-            moveIndex->data = moveIndex->prevPtr->data;
-            moveIndex = moveIndex->prevPtr;
-         }
-
-         moveIndex->data = insert;
-         next = next->nextPtr; // Set next to the next pointer in the array
+      ListNode<NODETYPE> *next = firstPtr->nextPtr; // we start at the 2nd element
+      while(next != nullptr)  // as long as the 2nd/next element isn't null
+      {
+      	NODETYPE insert = next->getData(); //save the element value pointed by next
+      	ListNode<NODETYPE> *moveIndex = next; // move index is the next
+      	
+         // while the index we're looking at isn't the first and the data 
+         // before it is greater than the value we want to insert
+      	while(moveIndex != firstPtr && moveIndex->prevPtr->getData() > insert) 
+      	{
+            // we move the previous data forward and move the index back 
+      		moveIndex->data = moveIndex->prevPtr->data;
+      		moveIndex = moveIndex->prevPtr; 
+      		
+      	}    
+         // once we get to the condition that moveIndex->prevPtr->getData() < insert, then we can insert the 
+      	moveIndex->data = insert; 
+      	
+         // move to the next pointer in the list
+      	next = next->nextPtr; 
       }
       
       
    }
 
+   // assuming the list is sorted already
    void insertAtSorted(NODETYPE & value)
    {
-      if (isEmpty()) insertAtBack(value) // 1 
+      if(isEmpty()) insertAtBack(value);
       else{
-         ListNode<NODETYPE> * newPtr = new ListNode<NODETYPE>{value}; // 1
-         ListNode<NODETYPE> * currentPtr = firstPtr; //1
-         while (currentPtr != nullptr && currentPtr->getData() < newPtr->getData()){ // worst case: n times
-            currentPtr = currentPtr->nextPtr; // 
-         }
-         if (currentPtr == nullptr) insertAtBack(value); // 1
-         else if (currentPtr == firstPtr) insertAtFront(value); // 1
-         else{
-            currentPtr->prevPtr->nextPtr = newPtr; // 1
-            newPtr->prevPtr = currentPtr->prevPtr; // 1
-            newPtr->nextPtr = currentPtr;          // 1
-            currentPtr->prevPtr = newPtr;          // 1
-            size++;
-         }
+      	
+      	ListNode<NODETYPE>* newPtr = new ListNode<NODETYPE>{value};
+      	ListNode<NODETYPE> *currentPtr = firstPtr; 
+      	while(currentPtr !=nullptr and currentPtr->getData() < newPtr->getData())
+      	   currentPtr = currentPtr->nextPtr; 
+      	if(currentPtr == nullptr) insertAtBack(value);
+      	else if(currentPtr == firstPtr) insertAtFront(value); 
+      	else
+      	{
+      		currentPtr->prevPtr->nextPtr = newPtr;
+      		newPtr->prevPtr = currentPtr->prevPtr;
+      		newPtr->nextPtr = currentPtr; 
+      		currentPtr->prevPtr = newPtr; 
+      		size++;
+      	}
+      	
       }
+      
+      
+      
    }
-
-   // T(n) = O(n) 
 
    NODETYPE binarySearch(NODETYPE & keyValue)
    {
-      int low = 0;
-      int high = size - 1; 
-
+      int low = 0; 
+      int high = size - 1;
       ListNode<NODETYPE> * lowPtr = firstPtr;
       ListNode<NODETYPE> * highPtr = lastPtr;
-      ListNode<NODETYPE> * midPtr = lowPtr;
-
-      int middle = (low + high + 1)/2; 
-   
-      for(int i = 0; i < middle-low; i++){
-         midPtr = midPtr->nextPtr;
-      }
-
-      ListNode<NODETYPE> * foundPtr = nullptr;
-
+      ListNode<NODETYPE> * midPtr;  
+      
+      int middle = (low + high +1)/2; 
+     
+      ListNode<NODETYPE> *foundPtr = nullptr; 
       do{
-         midPtr = lowPtr;
-         if (keyValue == midPtr->getData()){
-            foundPtr = midPtr;
-         } else if (keyValue < midPtr->getData()){
-            high = middle - 1; 
-            highPtr = midPtr->prevPtr;
-         } else {
-            low = middle + 1;
-            lowPtr = midPtr->nextPtr;
-         }
-
-         middle = (low + high + 1)/2; 
-   
-      } while(low <= high && foundPtr == nullptr);
-
-      if (foundPtr != nullptr){
+      	midPtr = lowPtr;
+      	for(int i=0; i < middle-low ; i++)
+        midPtr = midPtr->nextPtr; 
+      	if(keyValue ==  midPtr->getData())
+      	    foundPtr = midPtr; 
+      	else if (keyValue < midPtr->getData())
+      	{
+      		high = middle - 1; 
+      		highPtr = midPtr->prevPtr; 
+      	}
+      	else
+      	{
+      		low = middle + 1;
+      		lowPtr = midPtr->nextPtr; 
+      	}
+      	middle = (low + high +1)/2; 
+      	
+        
+      }while(low <= high && foundPtr == nullptr);
+      
+      if(foundPtr != nullptr)
          return foundPtr->getData();
-      } else {
-         return -1;
-      }
+      else 
+         return -1; 
    }
-
-   // n -> n/2 -> n/4  -> ... until -> 1
-
-   // T(n) = O(log2(n))
 
 
    bool isEmpty() const {
