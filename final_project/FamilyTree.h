@@ -58,7 +58,7 @@ private:
             if (!(rootPtr->getChildren().empty())){
                 std::string ind = "";
                 for (int i = 0; i < indents; i++){
-                    ind += "--";
+                    ind += "--"; // only runs if we've found at least one child
                 }
                 std::cout << ind + "Children of " + rootPtr->getMember().getFirstName() + " " +  rootPtr->getMember().getLastName() + ":\n"; 
                 indents++;

@@ -39,6 +39,7 @@ void Person::setSpouse(string sp){
     spouse = sp;
 }
 
+// indents argument given to add to number of indents based on tree depth level
 string Person::toString(int indents){
     ostringstream output; 
     string ind = "";

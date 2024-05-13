@@ -19,6 +19,7 @@ public:
     void setYearsAlive(std::string);
     void setSpouse(std::string);
 
+    // indents argument given here to keep track of # of indents to print
     std::string toString(int indents = 0);
 private:
     std::string firstName;

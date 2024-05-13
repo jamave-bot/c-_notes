@@ -1,5 +1,4 @@
 #include <iostream>
-#include "BinarySearchTree.h"
 #include "FamilyTree.h"
 #include "Person.h"
 #include <string>
